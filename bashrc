@@ -1,4 +1,5 @@
 PLATFORM=$(uname)
+HOSTNAME=$(hostname)
 
 
 case $PLATFORM in
@@ -51,6 +52,7 @@ function __prompt_command() {
 
 		FreeBSD)
 			PS1="${txtgrn}\u@\h:\w "
+			[ $HOSTNAME = "sleipner" ] && PS1="${txtwht}\u@\h:\w "
 		;;
 
 		Linux)
@@ -64,7 +66,11 @@ function __prompt_command() {
     if [ $EXIT != 0 ]; then
 		case $PLATFORM in
 			FreeBSD)
-		        PS1+="${txtred}[$EXIT]${txtgrn}\$ ${txtrst}"
+				if [ $HOSTNAME = "sleipner" ];then
+		        	PS1+="${txtred}[$EXIT]${txtwht}\$ ${txtrst}"
+					else
+		        		PS1+="${txtred}[$EXIT]${txtgrn}\$ ${txtrst}"
+				fi
 			;;
 			Linux)
 		        PS1+="${txtred}[$EXIT]${txtblu}\$ ${txtrst}"
