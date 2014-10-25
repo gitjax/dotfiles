@@ -1,0 +1,31 @@
+### jax's inner/nested tmux ###
+
+set -g prefix C-a  # control-a for inner tmux.
+unbind C-b	# leave control-b unmolested.
+
+setw -g automatic-rename off
+
+# Colors.
+setw -g status-style fg=colour044,bg=colour234
+setw -g window-status-current-style fg=colour0,bg=colour044
+setw -g pane-active-border-style fg=colour044
+
+
+# go away, ugly rodent!
+setw -g mode-mouse off
+set -g mouse-select-pane off
+set -g mouse-resize-pane off
+set -g mouse-select-window off
+
+
+# navigation/resize
+bind-key -r n next-window
+bind-key C-a last-window
+bind -n M-m select-pane -t :.+
+
+bind -n C-Right resize-pane -R 3
+bind -n C-Left resize-pane -L 3
+bind -n C-Up resize-pane -U 3
+bind -n C-Down resize-pane -D 3
+
+
