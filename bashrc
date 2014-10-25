@@ -1,6 +1,3 @@
-# jax's .bashrc
-
-
 PLATFORM=$(uname)
 
 
@@ -18,6 +15,23 @@ case $PLATFORM in
 	;;
 
 	Linux)
+
+		# So far, this assumes RedHat/Centos 6.x
+
+		# Source global definitions
+		if [ -f /etc/bashrc ]; then
+        	. /etc/bashrc
+		fi
+
+		if [ -x /usr/bin/vim ];then
+			export EDITOR=/usr/bin/vim
+			alias vi=/usr/bin/vim
+			else
+				export EDITOR=/bin/vi
+
+		fi
+
+
 	;;
 
 esac
@@ -36,7 +50,7 @@ function __prompt_command() {
     if [ $EXIT != 0 ]; then
         PS1+="${txtred}[$EXIT]${txtgrn}\$ ${txtrst}"      # Add red if exit code non 0
      else
-        PS1+="[$EXIT]\$ ${txtrst}"      # Add red if exit code non 0
+        PS1+="[$EXIT]\$ ${txtrst}"
 
     fi
 
