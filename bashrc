@@ -45,10 +45,32 @@ function __prompt_command() {
 	local txtgrn='\e[0;32m' # Green
 	local txtwht='\e[0;37m' # White
 	local txtrst='\e[0m'    # Text Reset
-	PS1="${txtgrn}\u@\h:\w "
+	local txtblu='\e[0;34m' # Blue
+
+	case $PLATFORM in
+
+		FreeBSD)
+			PS1="${txtgrn}\u@\h:\w "
+		;;
+
+		Linux)
+			PS1="${txtblu}\u@\h:\w "
+		;;
+
+	esac
+
+
 
     if [ $EXIT != 0 ]; then
-        PS1+="${txtred}[$EXIT]${txtgrn}\$ ${txtrst}"      # Add red if exit code non 0
+		case $PLATFORM in
+			FreeBSD)
+		        PS1+="${txtred}[$EXIT]${txtgrn}\$ ${txtrst}"
+			;;
+			Linux)
+		        PS1+="${txtred}[$EXIT]${txtblu}\$ ${txtrst}"
+			;;
+		esac
+
      else
         PS1+="[$EXIT]\$ ${txtrst}"
 
@@ -60,7 +82,6 @@ function __prompt_command() {
 # txtred='\e[0;31m' # Red
 # txtgrn='\e[0;32m' # Green
 # txtylw='\e[0;33m' # Yellow
-# txtblu='\e[0;34m' # Blue
 # txtpur='\e[0;35m' # Purple
 # txtcyn='\e[0;36m' # Cyan
 # txtwht='\e[0;37m' # White
